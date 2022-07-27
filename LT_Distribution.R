@@ -1,0 +1,5 @@
+library(zipfR)
+ZM = lnre("zm", alpha = 1.5, B = 0.1)
+zmsample = rlnre(ZM, n=100)
+zmnumeric = as.numeric(as.character(zmsample))
+plot(zmnumeric)
