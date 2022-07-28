@@ -112,10 +112,10 @@ for (i in 1:20){
 #plot(Genera_Sedum$Rank +mean(q.hats), Genera_Sedum$Images_Sedum, log="xy")
 #title(main="Plot avec le q optimisé")
 #plot(x, 8.69x)
-
+setwd('C:/Users/nilsr/Bureau/PRE/Stage_M1/Donnees_CSV')
 
 N <- 59    # the size of my dataset
-x <- read.csv("Especes_Sedum.csv")    # my dataset file
+Genera_Sedum <- read.csv("Especes_Sedum.csv")    # my dataset file
 
 x=Genera_Sedum$Images_Sedum
 negloglik <- function(parms1, parms2) {
