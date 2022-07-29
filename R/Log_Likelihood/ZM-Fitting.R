@@ -1,9 +1,11 @@
+getwd()
+setwd('C:/Users/nilsr/Desktop/PRE/Stage_M1/Jupyter_Notebook/Donnees_CSV')
 #On veut modéliser de la même manière pour chaque genre contenant un nombre suffisant d'espèces
 #Modélisons le Genre Sedum
 Genera_Sedum <- read.csv('Especes_Sedum.csv')
-#install.packages("dplyr")
-#desc <- dplyr::desc
-#library(dplyr)
+install.packages("dplyr")
+desc <- dplyr::desc
+library(dplyr)
 Genera_Acacia <- read.csv('Especes_Acacia.csv')
 Genera_Trifolium <- read.csv('Especes_Trifolium.csv')
 Genera_Hypericum <- read.csv('Especes_Hypericum.csv')
