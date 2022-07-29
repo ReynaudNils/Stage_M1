@@ -1,7 +1,6 @@
 *.pdf 
 *.png 
-*.jpg 
-*.jpeg 
+*.jpg  
  
 *egg-info 
 __pycache__/ 
