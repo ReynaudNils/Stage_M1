@@ -6,7 +6,8 @@ Species <- read.csv('Especes.csv')
 Genera <- read.csv('Especes2.csv')
 Species$Rank<-rank( desc (Species$Images_Plante))
 Genera$Rank<-rank( desc (Genera$Images_Genre))
-
+Species
+Genera
 #R code Species
 set.seed(8)
 
@@ -79,4 +80,4 @@ z2 <- signif(fit2$coef[[2]], 4) * (-1)
 q2
 z2
 plot(Genera$Rank +mean(q.hats2), Genera$Images_Genre, type="l", log="xy")
-title(main="Plot pour les genresavec le q optimisé")
+title(main="Plot pour les genres avec le q optimisé")

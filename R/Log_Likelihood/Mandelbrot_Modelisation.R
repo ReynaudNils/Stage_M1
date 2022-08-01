@@ -5,15 +5,31 @@ library(stats4)
 N <- 59    # the size of my dataset
 Genera_Sedum <- read.csv("Especes_Sedum.csv")    # my dataset file
 Genera_Sedum
-x=Genera_Sedum$Images_Sedum
+Species <- read.csv("Especes.csv")
+Genera <- read.csv("Especes2.csv")
+Species
+Genera
+
+#install.packages("dplyr")
+#desc <- dplyr::desc
+#library(dplyr)
+Genera_Sedum$Rank<-rank( desc (Genera_Sedum$Images_Sedum))
+Species$Rank<-rank( desc (Species$Images_Plante))
+Genera$Rank<-rank( desc (Genera$Images_Genre))
+Liste = list(Species$Rank, Genera$Rank, Genera_Sedum$Rank)
+Liste2 = list(Species$Images_Plante, Genera$Images_Genre, Genera_Sedum$Images_Sedum)
+
+x=Genera$Images_Genre
 y=x/sum(x)
 y
-x2=Genera_Sedum$Rank
+x2=Genera$Rank
 x2
 sum(x)
 
 #Représentons graphiquement nos données
 plot(x2, y, type='l')
+
+
 #Définissons la fonction maximum de vraisemblance
 Pdf_Mandelbrot <- function(parms){
   invC <- sum(1/(1:N + parms[1])^parms[2])
@@ -28,7 +44,7 @@ negloglik2 <- function(parms1, parms2) {
   invC <- sum(1/(1:N + parms1)^parms2)
   return(-sum(log(1/((x2 + parms1)^(parms2)*invC))))
 }
-
+  
 #Ensuite avec le gradient en plus
 negloglik3 <- function(parms) {
   invC <- sum(1/(1:N + parms[1])^parms[2])
@@ -52,7 +68,7 @@ negloglik4 <- function(parms1, parms2) {
   attr(res, "gradient") <- c(A, B)
   res
 }
-
+  
 #La fonction gradient
 gradient <- function(parms) {
   invC <- sum(1/(1:N + parms[1])^parms[2])
@@ -138,7 +154,7 @@ optim2
 gradient(optim$par)
 gradient(optim2$par)
 
-#Représentons une Mandelbrot avec les coeffcients obtenus
+#Représentons une Mandelbrot avec les coefficients obtenus
 plot(Pdf_Mandelbrot(optim$par), ylim=c(0, max(y)), col='blue')
 lines(x2, y, type='l', col='red')
 #Ensuite nlm, où le gradient doit être précisé comme attribut de la fonction, on utilise donc negloglik3
@@ -147,7 +163,7 @@ nlm2 = nlm(f = negloglik3, p = c(2, 4), hessian = F, check.analyticals=F, print.
 #nlm3 = nlm(f = negloglik5, p = rep(2, 4), hessian = TRUE)
 nlm
 nlm2
-nlm3
+#nlm3
 #On obtient un meilleur résultat avec la fonction sans gradient...
 gradient(nlm$estimate)
 gradient(nlm2$estimate)

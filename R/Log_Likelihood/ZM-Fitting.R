@@ -3,9 +3,9 @@ setwd('C:/Users/nilsr/Desktop/PRE/Stage_M1/Jupyter_Notebook/Donnees_CSV')
 #On veut modéliser de la même manière pour chaque genre contenant un nombre suffisant d'espèces
 #Modélisons le Genre Sedum
 Genera_Sedum <- read.csv('Especes_Sedum.csv')
-install.packages("dplyr")
-desc <- dplyr::desc
-library(dplyr)
+#install.packages("dplyr")
+#desc <- dplyr::desc
+#library(dplyr)
 Genera_Acacia <- read.csv('Especes_Acacia.csv')
 Genera_Trifolium <- read.csv('Especes_Trifolium.csv')
 Genera_Hypericum <- read.csv('Especes_Hypericum.csv')
@@ -50,6 +50,7 @@ Genera_Lamium$Rank<-rank( desc (Genera_Lamium$Images_Lamium))
 
 Liste = list(Genera_Sedum$Rank, Genera_Acacia$Rank, Genera_Trifolium$Rank, Genera_Hypericum$Rank, Genera_Ophrys$Rank, Genera_Anemone$Rank, Genera_Cirsium$Rank, Genera_Pelargonium$Rank, Genera_Peperomia$Rank, Genera_Lupinus$Rank, Genera_Dryopteris$Rank, Genera_Lactuca$Rank, Genera_Tradescantia$Rank, Genera_Alocasia$Rank, Genera_Papaver$Rank, Genera_Crotalaria$Rank, Genera_Phyllanthus$Rank, Genera_Dendrobium$Rank, Genera_Anthurium$Rank, Genera_Lamium$Rank)
 Liste2 = list(Genera_Sedum$Images_Sedum, Genera_Acacia$Images_Acacia, Genera_Trifolium$Images_Trifolium, Genera_Hypericum$Images_Hypericum, Genera_Ophrys$Images_Ophrys, Genera_Anemone$Images_Anemone, Genera_Cirsium$Images_Cirsium, Genera_Pelargonium$Images_Pelargonium, Genera_Peperomia$Images_Peperomia, Genera_Lupinus$Images_Lupinus, Genera_Dryopteris$Images_Dryopteris, Genera_Lactuca$Nombre_Images, Genera_Tradescantia$Images_Tradescantia, Genera_Alocasia$Images_Alocasia, Genera_Papaver$Images_Papaver, Genera_Crotalaria$Images_Crotalaria, Genera_Phyllanthus$Images_Phyllanthus, Genera_Dendrobium$Images_Dendrobium, Genera_Anthurium$Images_Anthurium, Genera_Lamium$Images_Lamium)
+Liste5 = c("Sedum", "Acacia", "Trifolium", "Hypericum", "Ophrys", "Anemone", "Cirsium", "Pelargonium", "Peperomia", "Lupinus", "Dryopteris", "Lactuca", "Tradescantia", "Alocasia", "Papaver", "Crotalaria", "Phyllanthus", "Dendrobium", "Anthurium", "Lamium")
 typeof(unlist(Liste[1]))
 Genera_Sedum$Rank
 typeof(unlist(Liste2[1]))
@@ -96,9 +97,11 @@ for (i in 1:20){
 
 for (i in 1:20){
   plot(unlist(Liste[i]) +unlist(Liste4[i]), unlist(Liste2[i]), type='l', log="xy")
-  #title(main="Plot avec le q optimisé")
+  title("Plot avec le q optimisé", Liste5[i])
 }
-
+Liste3[6]
+Liste4[6]
+fit$coefficients
 #q <- signif(mean(q.hats), 4)
 #z <- signif(fit$coef[[2]], 4) * (-1)
 #q
@@ -114,53 +117,3 @@ for (i in 1:20){
 #plot(Genera_Sedum$Rank +mean(q.hats), Genera_Sedum$Images_Sedum, log="xy")
 #title(main="Plot avec le q optimisé")
 #plot(x, 8.69x)
-setwd('C:/Users/nilsr/Bureau/PRE/Stage_M1/Donnees_CSV')
-
-N <- 59    # the size of my dataset
-Genera_Sedum <- read.csv("Especes_Sedum.csv")    # my dataset file
-
-x=Genera_Sedum$Images_Sedum
-negloglik <- function(parms1, parms2) {
-  invC <- sum(1/(1:N + parms1)^parms2)
-  return(-sum(log(1/((x + parms1)^(parms2)*invC))))
-}
-
-library(stats4)
-negloglik(2, 4)
-mle(negloglik, start=list(parms1=20, parms2=20), method = )
-help(mle)
-negloglik(c(1,1), x=2 )
-plot(d <- sapply(1:N, function(x) exp(-negloglik(c(5,5), x))))  # here I changed 10 to N (the size of my data)
-x <- sample(1:N, 1000, replace = T, prob = d)
-ml <- nlm(function(p) negloglik(p, x=Genera_Sedum$Images_Sedum), p=c(20,20), gradtol = 1e-12, steptol = 1e-9)
-ml
-#x
-#Species <- read.csv('Especes.csv')
-#Species$Rank<-rank( desc (Species$Images_Plante))
-#Species
-
-## set a N = 10
-#N <- length(Genera_Sedum$Images_Sedum)
-
-## populate the negative log likelihood function
-#negloglik <- function(parms, x=x) {
-#H <- sum(1/(1:N + parms[1])^parms[2])
-#  -sum(log(1/(x + parms[1])^parms[2]/H))
-#}
-
-#generate pmf for sampling
-#plot(d <- sapply(1:10, function(x) exp(-negloglik(c(5,5), x))))
-
-## draw a random sample with n=1000
-#x <- sample(1:10, 1000, replace = T, prob = d)
-#x
-## calculate ml estimates
-#ml <- nlm(function(p) negloglik(p, x=Genera_Sedum$Images_Sedum), p=c(20,20))
-#ml$estimate
-#plot(Genera_Sedum$Rank +ml$estimate[1], Genera_Sedum$Images_Sedum, log="xy")
-#N
-#somme = 0
-#for (i in 1:N){
-#  somme = somme + (1/(i+q)^z)
-#}
-#log(somme)
