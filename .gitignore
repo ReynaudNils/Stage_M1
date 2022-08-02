@@ -3,8 +3,7 @@
 *.jpg  
  
 *egg-info 
-__pycache__/ 
-*.zip 
+__pycache__/  
 *.tar 
 *.npy 
 *.log 
