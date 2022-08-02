@@ -1,4 +1,5 @@
-#setwd('C:/Users/nilsr')
+getwd()
+setwd('C:/Users/nilsr/Desktop/PRE/Stage_M1/Jupyter_Notebook/Donnees_CSV')
 #install.packages("dplyr")
 #desc <- dplyr::desc
 #library(dplyr)
