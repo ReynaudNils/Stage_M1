@@ -19,7 +19,8 @@ Genera$Rank<-rank( desc (Genera$Images_Genre))
 Liste = list(Species$Rank, Genera$Rank, Genera_Sedum$Rank)
 Liste2 = list(Species$Images_Plante, Genera$Images_Genre, Genera_Sedum$Images_Sedum)
 
-x=Genera$Images_Genre
+x=Genera$Images_Genre/306146
+x
 y=x/sum(x)
 y
 x2=Genera$Rank

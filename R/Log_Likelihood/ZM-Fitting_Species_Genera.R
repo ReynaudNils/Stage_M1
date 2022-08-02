@@ -1,8 +1,8 @@
 getwd()
 setwd('C:/Users/nilsr/Desktop/PRE/Stage_M1/Jupyter_Notebook/Donnees_CSV')
-#install.packages("dplyr")
-#desc <- dplyr::desc
-#library(dplyr)
+install.packages("dplyr")
+desc <- dplyr::desc
+library(dplyr)
 Species <- read.csv('Especes.csv')
 Genera <- read.csv('Especes2.csv')
 Species$Rank<-rank( desc (Species$Images_Plante))
@@ -82,3 +82,4 @@ q2
 z2
 plot(Genera$Rank +mean(q.hats2), Genera$Images_Genre, type="l", log="xy")
 title(main="Plot pour les genres avec le q optimisé")
+lines(Genera$Images_Genre, col='blue')
