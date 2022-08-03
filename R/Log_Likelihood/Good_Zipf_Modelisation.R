@@ -4,10 +4,10 @@ setwd('C:/Users/nilsr/Desktop/PRE/Stage_M1/Jupyter_Notebook/Donnees_CSV')
 #install.packages("dplyr")
 #desc <- dplyr::desc
 #library(dplyr)
-Data <- read.csv("Especes.csv")
-Data$Rank<-rank( desc (Data$Images_Plante))
+Data <- read.csv("Especes2.csv")
+Data$Rank<-rank( desc (Data$Images_Genre))
 Data
-fr <- unlist(Data['Images_Plante'])
+fr <- unlist(Data['Images_Genre'])
 p <- fr/sum(fr)
 typeof(p)
 len <- length(p)
@@ -30,10 +30,10 @@ s.sq <- opt$minimum
 s.ll <- coef(fit)
 opt
 fit
-plot(1:len,p)
+plot(1:len,p, xlab="Generas", ylab="Frequencies")
 lines(1:len,exp(loglikzipf(opt$minimum,len)),col="red")
 lines(1:len,exp(loglikzipf(coef(fit),len)),col="blue")
-title(main = "Fitting Zipf for Species")
+title(main = "Fitting Zipf for Generas")
 legend(x = "topright", legend = c("Moindre Carrés", "Max Vraisemblance"), col = c("red", "blue"), lty = 1, cex = 0.8)
 chisq.test(p, exp(loglikzipf(opt$minimum,length(p))))
 chisq.test(p, exp(loglikzipf(coef(fit),length(p))))
