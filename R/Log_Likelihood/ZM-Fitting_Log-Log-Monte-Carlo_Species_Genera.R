@@ -1,8 +1,8 @@
 getwd()
 setwd('C:/Users/nilsr/Desktop/PRE/Stage_M1/Jupyter_Notebook/Donnees_CSV')
-install.packages("dplyr")
-desc <- dplyr::desc
-library(dplyr)
+#install.packages("dplyr")
+#desc <- dplyr::desc
+#library(dplyr)
 Species <- read.csv('Especes.csv')
 Genera <- read.csv('Especes2.csv')
 Species$Rank<-rank( desc (Species$Images_Plante))
@@ -27,27 +27,31 @@ for (bx in 1:10) {
     print(q.b)
     print(length(Species$Rank))
     #print(Species$Rank)
-    res.sq.b <- sum( lm(log(Species$Images_Plante) ~ log(Species$Rank +q.b))$residuals^2)
+    res.sq.b <- sum( lm(log(Species$Images_Plante/306146) ~ log(Species$Rank +q.b))$residuals^2)
     res.sq.mc <- append(res.sq.mc, res.sq.b)
   }
   res.q.mc.dat <- data.frame(q.mc,res.sq.mc)
   q.hat <- res.q.mc.dat[which(res.q.mc.dat$res.sq.mc == min(res.q.mc.dat$res.sq.mc) ),]$q.mc
-  beta.hat <- lm(log(Species$Images_Plante) ~ log(Species$Rank + q.hat))$coefficients[2]
-  ss.hat <- sum( lm(log(Species$Images_Plante) ~ log(Species$Rank + q.hat))$residuals^2)
+  beta.hat <- lm(log(Species$Images_Plante/306146) ~ log(Species$Rank + q.hat))$coefficients[2]
+  ss.hat <- sum( lm(log(Species$Images_Plante/306146) ~ log(Species$Rank + q.hat))$residuals^2)
   q.hats <- append(q.hats, q.hat)
   beta.hats <- append(beta.hats, beta.hat)
   ss.hats <- append(ss.hats, ss.hat)
   qbeta.dat <- data.frame(q.hats,beta.hats)
 }
-fit <- lm( log(Species$Images_Plante) ~ log(Species$Rank + mean(q.hats)))
+fit <- lm( log(Species$Images_Plante/306146) ~ log(Species$Rank + mean(q.hats)))
 fit
 q <- signif(mean(q.hats), 4)
 z <- signif(fit$coef[[2]], 4) * (-1)
 q
 z
-plot(Species$Rank +mean(q.hats), Species$Images_Plante, type="l", log="xy")
+plot(Species$Rank +mean(q.hats), Species$Images_Plante/306146, type="l", log="xy")
 title(main="Plot pour les espèces avec le q optimisé")
+#lines(Species$Rank, Species$Images_Plante/306146, col="red")
 
+#Comparons les courbes
+Ordonnes <- Species$Images_Plante/306146
+plot(Species$Rank, Ordonnes)
 #R code Generas
 set.seed(8)
 

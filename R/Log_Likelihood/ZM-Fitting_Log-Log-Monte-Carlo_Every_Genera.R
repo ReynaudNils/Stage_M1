@@ -62,6 +62,8 @@ Genera_Lamium
 set.seed(8)
 Liste3 = c()
 Liste4 = c()
+Listeq = c()
+Listez = c()
 for (i in 1:20){
   q.hats <- c()
   beta.hats <- c()
@@ -93,14 +95,20 @@ for (i in 1:20){
   fit <- lm( log(unlist(Liste2[i])) ~ log(unlist(Liste[i]) + mean(q.hats)))
   Liste3[[(length(Liste3) + 1)]] <- fit
   Liste4[[(length(Liste4) + 1)]] <- mean(q.hats)
+  Listeq[[(length(Listeq) + 1)]] <- signif(mean(q.hats), 4)
+  Listez[[(length(Listez) + 1)]] <- signif(fit$coef[[2]], 4) * (-1)
 }
 
 for (i in 1:20){
   plot(unlist(Liste[i]) +unlist(Liste4[i]), unlist(Liste2[i]), type='l', log="xy")
   title("Plot avec le q optimisé", Liste5[i])
+  Listeq[i]
+  Listez[i]
 }
-Liste3[6]
-Liste4[6]
+Liste3[1]
+Liste4[1]
+Listeq
+Listez
 fit$coefficients
 #q <- signif(mean(q.hats), 4)
 #z <- signif(fit$coef[[2]], 4) * (-1)
