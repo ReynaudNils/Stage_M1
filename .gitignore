@@ -1,9 +1,10 @@
 
-*.jpg  
+*.jpg
  
 *egg-info 
 __pycache__/  
-*.tar 
+*.tar
+*.gz
 *.npy 
 *.log 
 *.blg 
@@ -12,7 +13,8 @@ __pycache__/
 *.aux 
 *.toc 
 *.out 
-.ipynb_checkpoints 
+.ipynb_checkpoints
+.data
 
 *.json
 !plantnet300K_species_names.json

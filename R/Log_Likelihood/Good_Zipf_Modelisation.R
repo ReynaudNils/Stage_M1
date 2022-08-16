@@ -4,10 +4,11 @@ setwd('C:/Users/nilsr/Desktop/PRE/Stage_M1/Jupyter_Notebook/Donnees_CSV')
 #install.packages("dplyr")
 #desc <- dplyr::desc
 #library(dplyr)
-Data <- read.csv("Especes2.csv")
-Data$Rank<-rank( desc (Data$Images_Genre))
+Data <- read.csv("Dataset_Especes.csv")
 Data
-fr <- unlist(Data['Images_Genre'])
+Data$Rank<-rank( desc (Data$Images_Classes))
+Data
+fr <- unlist(Data['Images_Classes'])
 p <- fr/sum(fr)
 typeof(p)
 len <- length(p)
